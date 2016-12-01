@@ -76,14 +76,17 @@ int getDataFromFile(FILE *fr, struct person employees[]){
     &employees[countEmp].month, &employees[countEmp].year , 
 	&employees[countEmp].salary , &employees[countEmp].sex, 
 	&employees[countEmp].firstname, &employees[countEmp].lastname)!=EOF)   {
-	   countEmp++;
-       if(countEmp>=SIZE)
-         return 0;
+         
+         if( (isValidDate(employees[countEmp].day, employees[countEmp].month, employees[countEmp].year) == true)
+		&& (isValidSex(employees[countEmp].sex) == true) ) {
+			countEmp++;
    }
 
-if(isValidDate(dd mm yy) == false || isValidSex(z) == false)
+countEmp++;
+       if(countEmp>=SIZE)
+         return 0;
 	
-
+}
 
    
    return countEmp;  
@@ -93,51 +96,62 @@ void sortDataByBirthday(struct person *p, int count){
 	
 	//year
 	int j,k;
-	for(j=0;j<i-1;j++)
+	for(j=0;j<count;j++)
 	{
-		for(k=0;k<i-1;k++)
+		for(k=0;k<count-1;k++)
 		{
-			if(osoby[k].year > osoby[k+1].year)
+			if(p[k].year > p[k+1].year)
 			{
-				struct person temp = osoby[k];
-               osoby[k]=osoby[k+1];
-               osoby[k+1]=temp;	
+				struct person temp = p[k];
+               p[k]=p[k+1];
+               p[k+1]=temp;	
 			}
-		}
-	}
+	
 	
 	//month
 
-		for(j=0;j<i-1;j++)
-	{
-		for(k=0;k<i-1;k++)
+	else if(p[k].year == p[k].year)
 		{
-			if(osoby[k].month > osoby[k+1].month)
+			if(p[k].month > p[k+1].month)
 			{
-				struct person temp = osoby[k];
-               osoby[k]=osoby[k+1];
-               osoby[k+1]=temp;	
+				struct person temp = p[k];
+               p[k]=p[k+1];
+               p[k+1]=temp;	
 			}
-		}
-	}
+		
+
 	
 	//day
-		for(j=0;j<i-1;j++)
-	{
-		for(k=0;k<i-1;k++)
+	else if(p[k].month == p[k+1].month)
 		{
-			if(osoby[k].day > osoby[k+1].day)
+			if(p[k].day > p[k+1].day)
 			{
-				struct person temp = osoby[k];
-               osoby[k]=osoby[k+1];
-               osoby[k+1]=temp;	
+				struct person temp = p[k];
+               p[k]=p[k+1];
+               p[k+1]=temp;	
 			}
 		}
 	}
-	
-	if(person[i].year == person[i+1].year)
-	if(person[i].month == person[i+1].month)
-	if(person[i].day == person[i+1].day)
+}
+}
 }
 
-void sortDataByLastName(struct person *p, int count);
+void sortDataByLastName(struct person *p, int count){
+	
+	int j,k;
+	for(j=0;j<count;j++)
+	{
+		for(k=0;k<count-1;k++)
+		{
+			if(strcmp(p[k].lastname, p[k+1].lastname)>0)
+			{
+				struct person temp = p[k];
+               p[k]=p[k+1];
+               p[k+1]=temp;	
+			}
+		}
+	}
+}
+
+
+
