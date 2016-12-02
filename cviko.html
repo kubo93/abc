@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+  <head>
+  <title></title>
+  
+  <style>
+	right{
+	color: green;}
+	wrong{
+	color: red;}
+	</style>
+    <script>
+	
+	var a;
+	var b;
+	
+	function generateNum(){	
+ var a =  Math.Floor(Math.random()*20)+1);
+	document.getElementById("firstNum").value = a;
+	
+ var b =  Math.Floor((Math.random()*20)+1);
+	document.getElementById("secondNum").value = b;
+	}
+	
+	function calculateNum(){
+	var calc = a*b;
+	document.getElementById("text1").value = calc;
+	}	
+    </script>
+  </head>
+
+  <body>
+ 
+ <div class="firstNum">  
+ <!-- <p class="firstNum"></p> -->
+  <p class="secondNum"></p>
+  <input type = "text" class="text1">
+  
+  <button value = "OK" onclick = "calculateNum()">OK</button>
+  
+</div>
+
+</body>
+</html>
