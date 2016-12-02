@@ -11,7 +11,7 @@ int main() {
     
     if(fr!=NULL){
        countEmp=getDataFromFile(fr, &employees[0]);
-       printf("\nCountEmp: %d", countEmp);
+       printf("\nCountEmp: %d ", countEmp);
        printf("%s", employees[3].lastname);
 	}
 	return 0;

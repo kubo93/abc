@@ -25,5 +25,5 @@ void sortDataByBirthday(struct person *p, int count);
 void sortDataByLastName(struct person *p, int count);
 void printData(struct person *p, int count);
 float getAverageSalary(struct person *p, int count, char sex);
-void createEmailFile(struct person *p, int count, char *fileName);
+void createEmailFile(struct person *p, int count, FILE *fileName);
 

@@ -1,4 +1,5 @@
 #include <string.h>
+#include<ctype.h>
 #include "Employee.h"
 #include "struct.h"
 
@@ -41,7 +42,8 @@ bool isValidDate(int dd, int mm, int yy){
 }
 
 bool isValidSex(char z){
-    if(z=='m' || z=='M' || z=='F' || z=='f')
+    toupper(z);
+	if(z=='M' || z=='F')
        return true;
     else
 	   return false;   
@@ -73,22 +75,19 @@ int getDataFromFile(FILE *fr, struct person employees[]){
       return NULL;
    int countEmp=0;
    while( fscanf(fr, "%d%d%d%f %c %s%s", &employees[countEmp].day,
-    &employees[countEmp].month, &employees[countEmp].year , 
-	&employees[countEmp].salary , &employees[countEmp].sex, 
-	&employees[countEmp].firstname, &employees[countEmp].lastname)!=EOF)   {
-         
-         if( (isValidDate(employees[countEmp].day, employees[countEmp].month, employees[countEmp].year) == true)
-		&& (isValidSex(employees[countEmp].sex) == true) ) {
+    									 &employees[countEmp].month, 
+										 &employees[countEmp].year, 
+										 &employees[countEmp].salary, 
+										 &employees[countEmp].sex, 
+										 &employees[countEmp].firstname, 
+										 &employees[countEmp].lastname)!=EOF) {
+		
+		if( (isValidDate(employees[countEmp].day, employees[countEmp].month, employees[countEmp].year) == true) && (isValidSex(employees[countEmp].sex) == true) ) {
 			countEmp++;
-   }
-
-countEmp++;
+		}
        if(countEmp>=SIZE)
          return 0;
-	
-}
-
-   
+   }
    return countEmp;  
 }
 
@@ -106,8 +105,8 @@ void sortDataByBirthday(struct person *p, int count){
                p[k]=p[k+1];
                p[k+1]=temp;	
 			}
-	
-	
+			
+			
 	//month
 
 	else if(p[k].year == p[k].year)
@@ -122,7 +121,7 @@ void sortDataByBirthday(struct person *p, int count){
 
 	
 	//day
-	else if(p[k].month == p[k+1].month)
+	else if(p[k].month == p[k].month)
 		{
 			if(p[k].day > p[k+1].day)
 			{
@@ -152,6 +151,53 @@ void sortDataByLastName(struct person *p, int count){
 		}
 	}
 }
+
+void printData(struct person *p, int count){
+	
+	int i;
+	for(i=0;i<count;i++)
+	printf("%d%d%d%f %c %s%s", p[i].month, p[i].year , p[i].salary , p[i].sex, 
+	p[i].firstname, p[i].lastname);
+}
+
+float getAverageSalary(struct person *p, int count, char sex){
+	
+	int i;
+	
+	int countPersM = 0;
+	float averageSalM = 0;
+	float tempSalM = 0;
+	
+	int countPersF = 0;
+	float averageSalF = 0;
+	float tempSalF = 0;
+	
+	//males
+	if(sex == 'M'){
+for(i=0;i<count;i++){
+	tempSalM += p[i].salary; 
+	countPersM++;
+					}
+				}
+		averageSalM = tempSalM/countPersM;
+				
+	//females
+	if(sex == 'F'){
+		for(i=0;i<count;i++){
+			tempSalF += p[i].salary;
+			countPersF++;
+		}
+	}
+	averageSalF = tempSalF/countPersF;	
+}
+
+void createEmailFile(struct person *p, int count, FILE *fileName){
+	
+	
+	
+	
+}
+
 
 
 
